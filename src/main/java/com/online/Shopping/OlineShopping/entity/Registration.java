@@ -1,6 +1,8 @@
 package com.online.Shopping.OlineShopping.entity;
 
 import javax.persistence.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Entity
 @Table(name = "Registration")
@@ -11,7 +13,8 @@ public class Registration {
     private String Firstname;
     private String Email;
     private Long Mobile;
-    private String Password;
+  //  private String Password;
+    private String  password;
 
     public Registration() {
     }
@@ -21,7 +24,7 @@ public class Registration {
         Firstname = firstname;
         Email = email;
         Mobile = mobile;
-        Password = password;
+        this.password = password;
     }
 
     public Long getId() {
@@ -57,11 +60,16 @@ public class Registration {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = encriptings(password);
+    }
+
+    private static String encriptings(String Password)
+    {
+        return Base64.getEncoder().encodeToString(Password.getBytes());
     }
 
     @Override
@@ -71,7 +79,7 @@ public class Registration {
                 ", Firstname='" + Firstname + '\'' +
                 ", Email='" + Email + '\'' +
                 ", Mobile=" + Mobile +
-                ", Password='" + Password + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

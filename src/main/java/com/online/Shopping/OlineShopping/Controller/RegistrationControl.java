@@ -18,7 +18,6 @@ public class RegistrationControl {
     @PostMapping("/register")
     public Registration save(@RequestBody Registration registration)
     {
-        System.out.println("hello"+registration.getFirstname());
         return registrationService.saveemp(registration);
     }
 
